@@ -8,3 +8,12 @@ Accept: application/json
 GET {{SuperHeroAPI_HostAddress}}/weatherforecast
 
 ###
+
+POST {{SuperHeroAPI_HostAddress}}/api/superhero
+Content-Type: application/json
+
+{
+  //SuperHero
+}
+
+###
