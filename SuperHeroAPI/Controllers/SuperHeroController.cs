@@ -42,5 +42,38 @@ namespace SuperHeroAPI.Controllers
 			await _context.SaveChangesAsync();
 			return Ok(await _context.SuperHeroes.ToListAsync());
 		}
+		[HttpPut]
+
+		public async Task<ActionResult<List<SuperHero>>> UpdateHero(SuperHero updatedHero)
+		{
+			var DBhero = await _context.SuperHeroes.FindAsync(updatedHero.ID);
+			if(DBhero == null)
+			{
+				BadRequest("Hero not found...");
+			}
+			DBhero.Name = updatedHero.Name;
+			DBhero.FirstName = updatedHero.FirstName;
+			DBhero.LastName = updatedHero.LastName;
+			DBhero.Place = updatedHero.Place;	
+
+			await _context.SaveChangesAsync();
+
+			return Ok(await _context.SuperHeroes.ToListAsync());
+		}
+		[HttpDelete]
+
+		public async Task<ActionResult<List<SuperHero>>> DeleteHero(SuperHero updatedHero)
+		{
+			var DBhero = await _context.SuperHeroes.FindAsync(updatedHero.ID);
+			if (DBhero == null)
+			{
+				BadRequest("Hero not found...");
+			}
+	
+			_context.SuperHeroes.Remove(DBhero);
+			await _context.SaveChangesAsync();
+
+			return Ok(await _context.SuperHeroes.ToListAsync());
+		}
 	}
 }
